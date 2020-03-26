@@ -13,7 +13,7 @@ A makefile sample is provided in ```makefile.inc.sample```.
 make nanos_xitao
 ```
 
-## Running the example ##
+## Running the batch tiled dense matrix multiplication example ##
 ```bash
 make run
 ```
