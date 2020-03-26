@@ -1,0 +1,34 @@
+# Set to 1 enable checking results 
+CHECK_RESULT = 1
+
+#XiTAO path
+XITAO_HOME = ~/Repos/xitao
+include ${XITAO_HOME}/makefile.sched
+
+#Nanos path
+NANOS6_HOME = /usr/local
+
+ifeq ($(CHECK_RESULT),1)
+	#LAPACK path
+	LAPACK_HOME= ~/Packages/lapack-3.8.0
+	# Enable checking results
+	CXXFLAGS += -DCHECK_RESULT
+	# Include path for Cblas
+	CXXFLAGS += -I ${LAPACK_HOME}/CBLAS/include/
+	# Reference BLAS and CBLAS lib path
+	LIBS += ${LAPACK_HOME}/libcblas.a ${LAPACK_HOME}/librefblas.a 
+endif
+
+#Include paths
+CXXFLAGS += -I ${XITAO_HOME}/include -I./include -I ${NANOS6_HOME}/include 
+CXXFLAGS += -O3 -fopenmp
+CXXFLAGS += --std=c++11 
+
+# XiTAO lib path
+LIBS += -L ${XITAO_HOME}/lib  
+# Nanos library mode path
+LIBS += ${NANOS6_HOME}/lib/nanos6-library-mode.o 
+# Linker flags
+LDFLAGS += -lgfortran -fopenmp -pthread -lnanos6 -lxitao 
+# Linker flags needed for nanos library mode usage
+LDFLAGS +=  -Wl,-z,lazy
