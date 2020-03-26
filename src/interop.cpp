@@ -2,11 +2,10 @@
 #include "xitao_dgemm.h"
 #include "ompss_dgemm.h"
 #include "interop_args.h"
-void interop_init() {
 
+void interop_init() {
   interop_xitao_init();
   interop_ompss_init();
-
 }
 
 void interop_start(void* args) { 
